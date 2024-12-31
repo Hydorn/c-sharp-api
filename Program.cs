@@ -26,7 +26,7 @@ builder.Services.AddSwaggerGen(options =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Enter 'Bearer' followed by a space and the JWT token in the text box below.\nExample: 'Bearer eyJhbGciOiJIUzI1NiIsInR...' "
+        Description = "Enter a bearer token eg: 'eyJhbGciOiJIUzI1NiIsInR...' "
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -56,6 +56,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SECRET"])),
         ValidIssuer = builder.Configuration["JWT:ISSUER"],
         ValidAudience = builder.Configuration["JWT:AUDIENCE"],
+        RoleClaimType = "Role",
         ClockSkew = TimeSpan.Zero,
     };
 });

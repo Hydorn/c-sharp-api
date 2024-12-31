@@ -80,11 +80,10 @@ namespace EntityFW.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity([
-                     new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                     new Claim(JwtRegisteredClaimNames.Name, user.Name.ToString()),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email.ToString()),
-                    //#TODO - add roles
-                    new Claim("Admin", false.ToString())
+                    new Claim("Role", user.Role)
                      ]),
                 Expires = DateTime.UtcNow.AddMinutes(15),
                 SigningCredentials = credentials,
